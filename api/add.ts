@@ -57,6 +57,7 @@ export default async function handler(req: any, res: any) {
       spreadsheetId,
       range: 'GiaoNhanMau!A:M',
       valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS', // 🔥 FIX CHÍNH
       requestBody: {
         values: [newRow],
       },
