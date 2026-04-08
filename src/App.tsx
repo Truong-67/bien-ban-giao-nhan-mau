@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
 import { addDays, differenceInDays, parseISO, format, isValid } from 'date-fns';
-import { AlertCircle, CheckCircle2, Clock, FileText, Loader2, Save, Search, Download, Moon, Sun, Filter, BarChart2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Clock, FileText, Loader2, Save, Search, Moon, Sun, Filter, BarChart2 } from 'lucide-react';
 
 interface Danhmuc {
   giao: string[];
@@ -227,37 +227,7 @@ export default function App() {
 
     return { total: filteredRecords.length, done, overdue, warning, processing };
   }, [filteredRecords]);
-
-  const exportToCSV = () => {
-    const headers = [
-      'STT', 'Mã CT', 'Tên CT', 'Cán bộ giao', 'Cán bộ nhận', 
-      'Ngày giao', 'Mã mẫu', 'Nơi để mẫu', 'Ghi chú', 
-      'Trạng thái', 'Ngày trả (Kế hoạch)', 'Ngày trả (Thực tế)'
-    ];
-    
-    const csvContent = [
-      headers.join(','),
-      ...filteredRecords.map(r => {
-        const ngayTraKeHoach = calculateNgayTraKeHoach(r.NgayGiao);
-        const status = getRowStatus(r).label;
-        return [
-          r.STT, r.MaChuongTrinh, r.TenChuongTrinh, r.CanBoGiao, r.CanBoNhan,
-          r.NgayGiao, r.MaMau, r.NoiDeMau, r.GhiChu,
-          status, ngayTraKeHoach, r.NgayTraBTH_ThucTe
-        ].map(v => `"${(v || '').toString().replace(/"/g, '""')}"`).join(',');
-      })
-    ].join('\n');
-
-    const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `ThongKe_GiaoNhanMau_${format(new Date(), 'yyyyMMdd')}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
+  
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-4 md:p-8 font-sans text-gray-900 dark:text-gray-100 transition-colors duration-200">
       <div className="max-w-7xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden transition-colors duration-200">
@@ -424,12 +394,6 @@ export default function App() {
                   </div>
                 </div>
               </div>
-              <button 
-                onClick={exportToCSV}
-                className="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
-              >
-                <Download className="w-4 h-4" /> Xuất Excel
-              </button>
             </div>
 
             {/* Table */}
