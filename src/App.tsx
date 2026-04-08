@@ -752,7 +752,7 @@ export default function App() {
                             <td className="px-4 py-3">{record.CanBoNhan}</td>
                             <td className="px-4 py-3">{formatDisplayDate(record.NgayGiao)}</td>
                             <td className="px-4 py-3 max-w-[220px]">
-                              <div className="truncate" title={record.MaMau}>
+                              <div className="whitespace-normal break-words">
                                 {record.MaMau}
                                 </div>
                             </td>
