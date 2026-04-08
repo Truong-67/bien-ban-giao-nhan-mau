@@ -449,18 +449,36 @@ export default function App() {
                                 {status.label}
                               </span>
                             </td>
-                            <td className="px-4 py-3">
-                              <div className="flex items-center gap-2">
-                                <input 
-                                  type="date" 
-                                  value={record.NgayTraBTH_ThucTe || ''}
-                                  onChange={(e) => handleUpdateNgayTra(record.STT, e.target.value)}
-                                  disabled={updating === record.STT}
-                                  className="px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50 transition-colors"
-                                />
-                                {updating === record.STT && <Loader2 className="w-4 h-4 animate-spin text-blue-600 dark:text-blue-400" />}
-                              </div>
-                            </td>
+                           <td className="px-4 py-3">
+  <div className="flex flex-col gap-1">
+
+    {/* HIỂN THỊ dd/MM/yyyy */}
+    <span className="text-xs text-gray-500 dark:text-gray-400">
+      {record.NgayTraBTH_ThucTe
+        ? format(new Date(record.NgayTraBTH_ThucTe), 'dd/MM/yyyy')
+        : ''}
+    </span>
+
+    <div className="flex items-center gap-2">
+      <input 
+        type="date" 
+        value={
+          record.NgayTraBTH_ThucTe
+            ? format(new Date(record.NgayTraBTH_ThucTe), 'yyyy-MM-dd')
+            : ''
+        }
+        onChange={(e) => handleUpdateNgayTra(record.STT, e.target.value)}
+        disabled={updating === record.STT}
+        className="px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50 transition-colors"
+      />
+
+      {updating === record.STT && (
+        <Loader2 className="w-4 h-4 animate-spin text-blue-600 dark:text-blue-400" />
+      )}
+    </div>
+
+  </div>
+</td>
                             <td className="px-4 py-3">
                               {record.FilePDF ? (
                                 <a href={record.FilePDF} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1 font-medium">
