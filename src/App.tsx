@@ -709,9 +709,12 @@ export default function App() {
                       <th className="px-4 py-3 font-medium">Cán bộ giao</th>
                       <th className="px-4 py-3 font-medium">Cán bộ nhận</th>
                       <th className="px-4 py-3 font-medium">Ngày giao</th>
+                      <th className="px-4 py-3 font-medium">Mã mẫu</th>
+                      <th className="px-4 py-3 font-medium">Nơi để mẫu</th>
                       <th className="px-4 py-3 font-medium">Ngày trả (Kế hoạch)</th>
                       <th className="px-4 py-3 font-medium">Trạng thái</th>
                       <th className="px-4 py-3 font-medium">Ngày trả (Thực tế)</th>
+                      <th className="px-4 py-3 font-medium">Ghi chú</th>
                       <th className="px-4 py-3 font-medium">File PDF</th>
                     </tr>
                   </thead>
@@ -720,7 +723,7 @@ export default function App() {
                     {filteredRecords.length === 0 ? (
                       <tr>
                         <td
-                          colSpan={9}
+                          colSpan={12}
                           className="px-4 py-12 text-center text-gray-500 dark:text-gray-400"
                         >
                           Không tìm thấy dữ liệu phù hợp
@@ -748,6 +751,8 @@ export default function App() {
                             <td className="px-4 py-3">{record.CanBoGiao}</td>
                             <td className="px-4 py-3">{record.CanBoNhan}</td>
                             <td className="px-4 py-3">{formatDisplayDate(record.NgayGiao)}</td>
+                            <td className="px-4 py-3">{record.MaMau}</td>
+                            <td className="px-4 py-3">{record.NoiDeMau || '-'}</td>
                             <td className="px-4 py-3 font-medium">{ngayTraKeHoach}</td>
 
                             <td className="px-4 py-3">
@@ -782,7 +787,11 @@ export default function App() {
                                 </div>
                               </div>
                             </td>
-
+                            <td className="px-4 py-3 max-w-[180px]">
+                              <div className="truncate" title={record.GhiChu}>
+                                {record.GhiChu || '-'}
+                                 </div>
+                            </td>
                             <td className="px-4 py-3">
                               {record.FilePDF ? (
                                 <a
