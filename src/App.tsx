@@ -751,8 +751,16 @@ export default function App() {
                             <td className="px-4 py-3">{record.CanBoGiao}</td>
                             <td className="px-4 py-3">{record.CanBoNhan}</td>
                             <td className="px-4 py-3">{formatDisplayDate(record.NgayGiao)}</td>
-                            <td className="px-4 py-3">{record.MaMau}</td>
-                            <td className="px-4 py-3">{record.NoiDeMau || '-'}</td>
+                            <td className="px-4 py-3 max-w-[220px]">
+                              <div className="truncate" title={record.MaMau}>
+                                {record.MaMau}
+                                </div>
+                            </td>
+                            <td className="px-4 py-3 max-w-[150px]">
+                              <div className="truncate" title={record.NoiDeMau}>
+                                {record.NoiDeMau || '-'}
+                                 </div>
+                            </td>
                             <td className="px-4 py-3 font-medium">{ngayTraKeHoach}</td>
 
                             <td className="px-4 py-3">
