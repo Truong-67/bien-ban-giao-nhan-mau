@@ -131,6 +131,7 @@ export default function App() {
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [filterGiao, setFilterGiao] = useState('');
   const [filterNhan, setFilterNhan] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
 
   const [formData, setFormData] = useState<FormDataState>(createDefaultFormData());
 
@@ -344,9 +345,9 @@ export default function App() {
         }
       }
 
-      return matchSearch && matchGiao && matchNhan && matchDate;
+      return matchSearch && matchGiao && matchNhan && matchDate && matchStatus;
     });
-  }, [records, searchTerm, dateRange.start, dateRange.end, filterGiao, filterNhan]);
+  }, [records, searchTerm, dateRange.start, dateRange.end, filterGiao, filterNhan, filterStatus]);
 
   const stats = useMemo(() => {
     let done = 0;
@@ -691,6 +692,22 @@ export default function App() {
                     />
                   </div>
                 </div>
+                <div className="space-y-1.5">
+                   <label className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                      <Filter className="w-3 h-3" />
+                     Trạng thái
+                     </label>
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:text-white transition-colors"
+                  >
+                    <option value="">Tất cả</option>
+                    <option value="completed">Đã trả</option>
+                    <option value="warning">Sắp đến hạn</option>
+                    <option value="overdue">Quá hạn</option>
+                    </select>
+                  </div>
               </div>
             </div>
 
