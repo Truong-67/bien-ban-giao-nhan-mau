@@ -344,7 +344,8 @@ export default function App() {
           if (endDate && recordDay > startOfDay(endDate)) matchDate = false;
         }
       }
-
+      const status = getRowStatus(record).status;
+      const matchStatus = !filterStatus || status === filterStatus;
       return matchSearch && matchGiao && matchNhan && matchDate && matchStatus;
     });
   }, [records, searchTerm, dateRange.start, dateRange.end, filterGiao, filterNhan, filterStatus]);
